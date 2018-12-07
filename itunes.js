@@ -29,7 +29,8 @@ $.get('https://itunes.apple.com/search?', {media:'music', term: query }, functio
 }
 
 function artistHtml (artist) {
+    
     return ` 
-    <p><a href="${artist.artistViewUrl}">${artist.artistName}</a> - ${artist.trackName}</p>
+    <p><a href="${artist.trackViewUrl}">${artist.artistName}</a> - ${artist.trackName}</p><img width="200" src="${artist.artworkUrl100}">
     `
 }
