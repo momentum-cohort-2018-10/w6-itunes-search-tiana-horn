@@ -6,28 +6,31 @@ $('#search-button').on('click', runSearch)
 
 function runSearch(){
     let query = $('#search-field').val();
+    console.log(query)
 
 
 
-$.get('https://itunes.apple.com/search?term=beyonce', {q: query }, function (results) {
+$.get('https://itunes.apple.com/search?', {media:'music', term: query }, function (results) {
     
-    var myResultsText = results;
-    var myResults = JSON.parse(myResultsText);
-    console.log(myResults.results[1].artistId);
+    let myResultsText = results;
+    let myResults = JSON.parse(myResultsText);
+    //console.log(myResults.results[1].trackName);
+    console.log(results)
+    
     let $resultsDiv = $('#search-results')
     
     $resultsDiv
         .empty()
         .append(
-            $('<p>')
-            .text(`Number of Beyonce songs: ${myResults.results[1].artistId}`)
+            $('<h2>')
         )
-//         .append(results.items.map(artistHtml))
-//     })
-// }
+        .append(myResults.results.map(artistHtml))
+    })
+}
 
-// function artistHtml () {
-//     return ` 
-//     <p><a href="${artist.html_url}">${artist.}</a> - ${artist.kind} || 'no description'}</p>
-//     `
-// }
+function artistHtml (artist) {
+    
+    return ` 
+    <p><a href="${artist.trackViewUrl}">${artist.artistName}</a> - ${artist.trackName}</p><img width="200" src="${artist.artworkUrl100}">
+    `
+}
